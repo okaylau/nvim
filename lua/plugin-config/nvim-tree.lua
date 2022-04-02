@@ -8,8 +8,6 @@ end
 local list_keys = require('keybindings').nvimTreeList
 
 nvim_tree.setup({
-  -- 关闭文件时自动关闭
-  auto_close = true,
   -- 不显示 git 状态图标
   git = {
     enable = false,
@@ -51,3 +49,7 @@ nvim_tree.setup({
     cmd = "wsl-open",
   },
 })
+-- auto close
+vim.cmd([[
+  autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+]])
